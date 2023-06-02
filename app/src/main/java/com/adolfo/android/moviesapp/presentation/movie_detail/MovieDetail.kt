@@ -27,7 +27,7 @@ import com.adolfo.android.moviesapp.presentation.movie_detail.components.Credits
 import com.adolfo.android.moviesapp.presentation.movie_detail.components.MovieDescriptionComponent
 import com.adolfo.android.moviesapp.presentation.movie_detail.components.MovieTitleComponent
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
 fun MovieDetail(
     movieDetailUiState: MovieDetailUiState,

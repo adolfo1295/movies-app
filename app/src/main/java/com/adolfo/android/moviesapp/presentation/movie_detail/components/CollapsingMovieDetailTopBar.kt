@@ -62,21 +62,21 @@ fun CollapsingMovieDetailTopBar(
     }
 
 
-    val scroll = remember { derivedStateOf { lazyListState.firstVisibleItemIndex } }.value
+    val scrollIndex = remember { derivedStateOf { lazyListState.firstVisibleItemIndex } }.value
 
     val progress by animateFloatAsState(
         targetValue = if (movie.overview.length < 100) {
-            if (scroll < 2) 0f else 1f
+            if (scrollIndex < 2) 0f else 1f
         } else {
-            if (scroll < 1) 0f else 1f
+            if (scrollIndex < 1) 0f else 1f
         },
         tween(500), label = ""
     )
     val motionHeight by animateDpAsState(
         targetValue = if (movie.overview.length < 100) {
-            if (scroll < 2) 350.dp else 60.dp
+            if (scrollIndex < 2) 350.dp else 60.dp
         } else {
-            if (scroll < 1) 350.dp else 60.dp
+            if (scrollIndex < 1) 350.dp else 60.dp
         },
         tween(500), label = ""
     )
@@ -93,10 +93,7 @@ fun CollapsingMovieDetailTopBar(
                 .height(motionHeight)
         ) {
             val textSize = motionProperties("movie_name")
-            Log.d(
-                "Detail",
-                "Scroll: $scroll Lazyvalue ${lazyListState.firstVisibleItemScrollOffset}"
-            )
+
             Box(
                 modifier = Modifier
                     .background(Color.Transparent)
@@ -153,6 +150,4 @@ fun CollapsingMovieDetailTopBar(
             }
         }
     }
-
-
 }

@@ -16,9 +16,10 @@
         end: ['background', 'end'],
         bottom: ['background', 'bottom'],
         top: ['background', 'top'],
-        alpha: 1
       },
       movie_name: {
+        width: 0,
+        height: 0,
         top: ['background', 'top'],
         bottom: ['background', 'bottom'],
         start: ['up_button', 'start'],
@@ -26,7 +27,6 @@
         custom: {
           txt_size: 20
         },
-        alpha: 0,
       },
       up_button: {
         top: ['background', 'top', 8],
@@ -35,7 +35,6 @@
       action_button: {
         bottom: ['background', 'bottom'],
         end: ['background', 'end', 8],
-        alpha: 1,
       }
     },
     end: {
@@ -51,20 +50,18 @@
         top: ['parent', 'top'],
         bottom: ['up_button', 'bottom'],
         start: ['up_button', 'end'],
-        end: ['background', 'end', 2],
+        end: ['parent', 'end', 2],
         custom: {
           txt_size: 20
         },
-        alpha: 1,
       },
       movie_image: {
-        width: 'spread',
-        height: 56,
+        width: 0,
+        height: 0,
         start: ['background', 'start'],
         end: ['background', 'end'],
         bottom: ['background', 'bottom'],
         top: ['background', 'top'],
-        alpha: 0
       },
       up_button: {
         top: ['parent', 'top'],
@@ -76,7 +73,6 @@
         height: 0,
         bottom: ['background', 'bottom'],
         end: ['background', 'end'],
-        alpha: 1,
       }
     }
   },
