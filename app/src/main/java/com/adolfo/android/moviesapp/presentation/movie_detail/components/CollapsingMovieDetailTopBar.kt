@@ -132,6 +132,7 @@ fun CollapsingMovieDetailTopBar(
             Text(
                 modifier = Modifier.layoutId("movie_name"),
                 text = movie.title,
+                fontSize = textSize.value.fontSize("txt_size"),
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
                 style = MaterialTheme.typography.titleMedium
