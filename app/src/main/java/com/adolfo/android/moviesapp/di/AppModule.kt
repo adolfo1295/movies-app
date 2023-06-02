@@ -1,6 +1,7 @@
 package com.adolfo.android.moviesapp.di
 
 import com.adolfo.android.moviesapp.data.api.MovieService
+import com.adolfo.android.moviesapp.data.api.MovieService.Companion.API_KEY
 import com.adolfo.android.moviesapp.data.api.MovieService.Companion.BASE_URL
 import com.adolfo.android.moviesapp.data.repository.MovieRepositoryImpl
 import com.adolfo.android.moviesapp.domain.repository.MovieRepository
@@ -31,7 +32,7 @@ object AppModule {
             .addInterceptor(Interceptor { chain: Interceptor.Chain ->
                 val originalHttpUrl: HttpUrl = chain.request().url
                 val url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("api_key", "e9ba2bff1c00cd46a61c1896636fa978")
+                    .addQueryParameter("api_key", API_KEY)
                     .build()
                 val requestBuilder: Request.Builder = chain.request().newBuilder()
                     .url(url)
