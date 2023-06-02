@@ -1,0 +1,106 @@
+{
+  ConstraintSets: {
+    start: {
+      background: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom'],
+        top: ['parent', 'top']
+      },
+      movie_image: {
+        width: 'spread',
+        height: 'spread',
+        start: ['background', 'start'],
+        end: ['background', 'end'],
+        bottom: ['background', 'bottom'],
+        top: ['background', 'top'],
+        alpha: 1
+      },
+      movie_name: {
+        top: ['background', 'top'],
+        bottom: ['background', 'bottom'],
+        start: ['up_button', 'start'],
+        end: ['background', 'end'],
+        custom: {
+          txt_size: 20
+        },
+        alpha: 0,
+      },
+      up_button: {
+        top: ['background', 'top', 8],
+        start: ['background', 'start'],
+      },
+      action_button: {
+        bottom: ['background', 'bottom'],
+        end: ['background', 'end', 8],
+        alpha: 1,
+      }
+    },
+    end: {
+      background: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start'],
+        end: ['parent', 'end'],
+        bottom: ['parent', 'bottom'],
+        top: ['parent', 'top']
+      },
+      movie_name: {
+        top: ['parent', 'top'],
+        bottom: ['up_button', 'bottom'],
+        start: ['up_button', 'end'],
+        end: ['background', 'end', 2],
+        custom: {
+          txt_size: 20
+        },
+        alpha: 1,
+      },
+      movie_image: {
+        width: 'spread',
+        height: 56,
+        start: ['background', 'start'],
+        end: ['background', 'end'],
+        bottom: ['background', 'bottom'],
+        top: ['background', 'top'],
+        alpha: 0
+      },
+      up_button: {
+        top: ['parent', 'top'],
+        bottom: ['parent', 'bottom'],
+        start: ['parent', 'start'],
+      },
+      action_button: {
+        width: 0,
+        height: 0,
+        bottom: ['background', 'bottom'],
+        end: ['background', 'end'],
+        alpha: 1,
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startVertical',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: 'action_button',
+            frames: [0,20,60,80,100],
+            scaleX: [0, 0.2, 0.6, 0.8, 1],
+            scaleY: [0, 0.2, 0.6, 0.8, 1],
+          },
+          {
+            target: 'movie_image',
+            frames: [0,20,60,80,100],
+            scaleX: [1, 0.8, 0.6, 0.4, 0],
+            scaleY: [1, 0.8, 0.6, 0.4, 0]
+          }
+        ],
+      }
+    }
+  }
+}
