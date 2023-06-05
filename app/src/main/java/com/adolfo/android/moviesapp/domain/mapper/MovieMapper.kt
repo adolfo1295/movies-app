@@ -16,11 +16,12 @@ fun Movie.toUiMovie(): UiMovie {
         posterPath = this.poster_path,
         releaseDate = this.release_date,
         voteAverage = this.voteAverage,
-        voteCount = this.voteCount
+        voteCount = this.voteCount,
+        price = 0.0
     )
 }
 
-fun MovieDetailResponseDto.toUiMovie(): UiMovie {
+fun MovieDetailResponseDto.toUiMovie(price: Double): UiMovie {
     return UiMovie(
         id = this.id,
         backdropPath = this.backdrop_path,
@@ -30,7 +31,8 @@ fun MovieDetailResponseDto.toUiMovie(): UiMovie {
         releaseDate = this.release_date,
         title = this.title,
         voteAverage = this.vote_average,
-        voteCount = this.vote_count
+        voteCount = this.vote_count,
+        price = price
     )
 }
 

@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -126,13 +128,7 @@ fun MovieDetailSuccess(
                     }
                 }
             }
-            Button(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(bottom = 8.dp),
-                onClick = { }) {
-                Text(text = "Ver más")
-            }
+            //IconTextComponent(data = "Comprar / Rentar", icon = Icons.Filled.ShoppingCart)
         }
     }
 

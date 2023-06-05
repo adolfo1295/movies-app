@@ -7,6 +7,7 @@ import com.adolfo.android.moviesapp.domain.model.UiCredits
 import com.adolfo.android.moviesapp.domain.model.UiMovie
 import com.adolfo.android.moviesapp.domain.repository.MovieRepository
 import javax.inject.Inject
+import kotlin.random.Random
 
 class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieService
@@ -24,7 +25,7 @@ class MovieRepositoryImpl @Inject constructor(
     override suspend fun getMovieDetail(movieId: String): Result<UiMovie> {
         return try {
             val response = movieService.getMovieDetail(movieId = movieId)
-            Result.success(response.toUiMovie())
+            Result.success(response.toUiMovie(generateRandomPrice()))
         } catch (e: Exception) {
             e.printStackTrace()
             Result.failure(e)
@@ -39,5 +40,9 @@ class MovieRepositoryImpl @Inject constructor(
             e.printStackTrace()
             Result.failure(e)
         }
+    }
+
+    private fun generateRandomPrice(): Double {
+        return Random.nextDouble(120.0, 300.0)
     }
 }

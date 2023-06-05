@@ -9,5 +9,7 @@ data class UiMovie(
     val releaseDate: String?,
     val title: String,
     val voteAverage: Double,
-    val voteCount: Int
+    val voteCount: Int,
+    val price: Double,
+    val favorite: Boolean = false
 )
