@@ -30,8 +30,6 @@ class MovieDetailViewModel @Inject constructor(
     init {
         if (movieId.isNotEmpty()) {
             getAllMovieData()
-            /*     getMovieDetails()
-                 getMovieCredits()*/
         }
     }
 

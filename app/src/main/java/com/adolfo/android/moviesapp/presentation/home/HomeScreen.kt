@@ -54,6 +54,7 @@ fun HomeScreen(
         if (homeState.loading) {
             Box(modifier = Modifier.fillMaxSize()) {
                 CircularProgressIndicator(
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
