@@ -2,6 +2,7 @@ package com.adolfo.android.moviesapp.presentation.movie_detail
 
 import com.adolfo.android.moviesapp.domain.model.UiCredits
 import com.adolfo.android.moviesapp.domain.model.UiMovie
+import com.adolfo.android.moviesapp.domain.model.UiMovieCart
 import com.adolfo.android.moviesapp.util.UiText
 
 data class MovieDetailUiState(
@@ -9,5 +10,6 @@ data class MovieDetailUiState(
     val loading: Boolean = false,
     val error: UiText? = null,
     val isSuccess: Boolean = false,
-    val movieCredits: UiCredits? = UiCredits(emptyList())
+    val movieCredits: UiCredits? = UiCredits(emptyList()),
+    val moviesInCart: List<UiMovie> = emptyList()
 )

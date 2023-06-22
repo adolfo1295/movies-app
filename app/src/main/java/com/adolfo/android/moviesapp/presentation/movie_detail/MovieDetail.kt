@@ -1,22 +1,22 @@
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
-
 package com.adolfo.android.moviesapp.presentation.movie_detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.adolfo.android.moviesapp.domain.model.UiMovie
 import com.adolfo.android.moviesapp.presentation.movie_detail.components.MovieDetailSuccess
 
 @Composable
 fun MovieDetail(
     movieDetailUiState: MovieDetailUiState,
-    onPopUp: () -> Unit
+    onPopUp: () -> Unit,
+    onCartClick: (UiMovie, Boolean) -> Unit,
+    isMovieInCart: Boolean
 ) {
 
     if (movieDetailUiState.loading) {
@@ -35,7 +35,11 @@ fun MovieDetail(
             MovieDetailSuccess(
                 uiMovie = it,
                 onPopUp = onPopUp,
-                movieDetailUiState = movieDetailUiState
+                movieDetailUiState = movieDetailUiState,
+                onCartClick = {movieCart, isInCart ->
+                    onCartClick(movieCart, isInCart)
+                },
+                isMovieInCart = isMovieInCart
             )
         }
     }

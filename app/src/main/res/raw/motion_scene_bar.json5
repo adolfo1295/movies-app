@@ -16,14 +16,13 @@
         end: ['background', 'end'],
         bottom: ['background', 'bottom'],
         top: ['background', 'top'],
-        alpha: 1
       },
       movie_name: {
-        bottom: ['parent', 'bottom', 10],
-        start: ['parent', 'start'],
-        end: ['parent', 'end'],
+        bottom: ['background', 'bottom', 12],
+        start: ['background', 'start'],
+        end: ['background', 'end'],
         custom: {
-          txt_size: 24
+          txt_size: 22
         }
       },
       action_button: {
@@ -31,7 +30,10 @@
         bottom: ['background', 'bottom'],
         start: ['background', 'start'],
         end: ['background', 'end'],
-        alpha: 1,
+      },
+      cart_button: {
+        top: ['background', 'top',8],
+        end: ['background', 'end', 8]
       }
     },
     end: {
@@ -44,20 +46,20 @@
         top: ['parent', 'top']
       },
       movie_image: {
-        width: 'spread',
-        height: 56,
+        width: 0,
+        height: 0,
         start: ['parent', 'start'],
         end: ['parent', 'end'],
         bottom: ['parent', 'bottom'],
         top: ['parent', 'top'],
-        alpha: 0
       },
       action_button: {
+        width: 0,
+        height: 0,
         top: ['background', 'top'],
         bottom: ['background', 'bottom'],
         start: ['background', 'start'],
         end: ['background', 'end'],
-        alpha: 0,
       },
       movie_name: {
         top: ['parent', 'top'],
@@ -66,6 +68,10 @@
         custom: {
           txt_size: 20
         }
+      },
+      cart_button: {
+        top: ['background', 'top',8],
+        end: ['background', 'end', 8]
       }
     }
   },
@@ -81,21 +87,24 @@
             frames: [0,20,60,80,100],
             scaleX: [1, 0.5, 0.3, 0.3, 0],
             scaleY: [1, 0.5, 0.3, 0.3, 0],
-            alpha: [1, 0.8, 0.6, 0.2, 0],
           },
           {
             target: ['movie_name'],
             frames: [0, 20, 60, 80, 100],
             scaleX: [1, 0.5, 0.3, 0.3, 1],
             scaleY: [1, 0.5, 0.3, 0.3, 1],
-            alpha: [0, 0, 0, 0, 1],
           },
           {
             target: 'action_button',
             frames: [0,20,60,80,100],
             scaleX: [1, 0.5, 0.3, 0.3, 0],
             scaleY: [1, 0.5, 0.3, 0.3, 0],
-            alpha: [1, 0.5, 0.3, 0.3, 0],
+          },
+          {
+            target: 'cart_button',
+            frames: [0,20,60,80,100],
+            scaleX: [1, 0.8, 0.6, 0.8, 1],
+            scaleY: [1, 0.8, 0.6, 0.8, 1],
           }
         ]
       }

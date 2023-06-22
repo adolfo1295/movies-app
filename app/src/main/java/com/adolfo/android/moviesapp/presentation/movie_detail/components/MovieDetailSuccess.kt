@@ -2,50 +2,51 @@
 
 package com.adolfo.android.moviesapp.presentation.movie_detail.components
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.adolfo.android.moviesapp.domain.model.UiMovie
 import com.adolfo.android.moviesapp.presentation.movie_detail.MovieDetailUiState
-import kotlinx.coroutines.launch
 
 @Composable
 fun MovieDetailSuccess(
     uiMovie: UiMovie,
     onPopUp: () -> Unit,
     movieDetailUiState: MovieDetailUiState,
+    onCartClick: (UiMovie, Boolean) -> Unit,
+    isMovieInCart: Boolean
 ) {
 
+    val context = LocalContext.current
     val lazyListState = rememberLazyListState()
     val scrollIndex = remember { derivedStateOf { lazyListState.firstVisibleItemIndex } }.value
 
@@ -66,8 +67,11 @@ fun MovieDetailSuccess(
         tween(500), label = ""
     )
 
+    Log.d("Detail", "Is in cart: $isMovieInCart")
+
     Scaffold(
-        modifier = Modifier.background(MaterialTheme.colorScheme.surface),
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.surface),
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
         topBar = {
@@ -128,7 +132,23 @@ fun MovieDetailSuccess(
                     }
                 }
             }
-            //IconTextComponent(data = "Comprar / Rentar", icon = Icons.Filled.ShoppingCart)
+            IconButton(
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    containerColor = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .navigationBarsPadding(),
+                onClick = {
+                    onCartClick(uiMovie, isMovieInCart)
+                }) {
+                Icon(
+                    imageVector = if (isMovieInCart)
+                        Icons.Default.ShoppingCart else Icons.Filled.Add,
+                    contentDescription = null
+                )
+            }
         }
     }
 

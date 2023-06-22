@@ -1,16 +1,21 @@
 package com.adolfo.android.moviesapp.data.repository
 
 import com.adolfo.android.moviesapp.data.api.MovieService
+import com.adolfo.android.moviesapp.data.local.cart.MovieCartDatabase
+import com.adolfo.android.moviesapp.data.local.cart.dao.MovieCartDao
+import com.adolfo.android.moviesapp.data.local.cart.entity.MovieCartEntity
 import com.adolfo.android.moviesapp.domain.mapper.toUiCredits
 import com.adolfo.android.moviesapp.domain.mapper.toUiMovie
 import com.adolfo.android.moviesapp.domain.model.UiCredits
 import com.adolfo.android.moviesapp.domain.model.UiMovie
 import com.adolfo.android.moviesapp.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import kotlin.random.Random
 
 class MovieRepositoryImpl @Inject constructor(
-    private val movieService: MovieService
+    private val movieService: MovieService,
+    private val movieDatabase: MovieCartDao
 ) : MovieRepository {
     override suspend fun getHomeMovies(): Result<List<UiMovie>> {
         return try {
@@ -40,6 +45,14 @@ class MovieRepositoryImpl @Inject constructor(
             e.printStackTrace()
             Result.failure(e)
         }
+    }
+
+    override suspend fun addMovieToCart(movieCartEntity: MovieCartEntity) {
+        movieDatabase.addMovieToCart(movieCartEntity)
+    }
+
+    override fun getMovieCart(): Flow<List<MovieCartEntity>> {
+        return movieDatabase.getMovieCart()
     }
 
     private fun generateRandomPrice(): Double {

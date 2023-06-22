@@ -13,9 +13,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,7 +50,8 @@ import com.adolfo.android.moviesapp.domain.model.UiMovie
 fun CollapsingTopAppBar(
     lazyScrollState: LazyStaggeredGridState,
     movie: UiMovie,
-    onActionPopularMovieClick: (UiMovie) -> Unit
+    onActionPopularMovieClick: (UiMovie) -> Unit,
+    onCartClick: () -> Unit
 ) {
     val context = LocalContext.current
     val motionScene = remember {
@@ -98,6 +104,16 @@ fun CollapsingTopAppBar(
                     }
                     .layoutId("movie_image")
             )
+            IconButton(
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                    contentColor = MaterialTheme.colorScheme.onTertiary
+                ),
+                modifier = Modifier.layoutId("cart_button"),
+                onClick = onCartClick
+            ) {
+                Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = null)
+            }
             Button(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -113,8 +129,9 @@ fun CollapsingTopAppBar(
             }
             Text(
                 textAlign = TextAlign.Center,
-                text = if (motionHeight == 300.dp) movie.title else "Now playing",
+                text = if (progress == 0f) movie.title else "Now playing",
                 fontSize = textSize.value.fontSize("txt_size"),
+                color = Color.White,
                 modifier = Modifier
                     .fillMaxWidth()
                     .layoutId("movie_name"),

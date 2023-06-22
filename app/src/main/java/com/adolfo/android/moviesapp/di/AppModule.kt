@@ -1,8 +1,11 @@
 package com.adolfo.android.moviesapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.adolfo.android.moviesapp.data.api.MovieService
 import com.adolfo.android.moviesapp.data.api.MovieService.Companion.API_KEY
 import com.adolfo.android.moviesapp.data.api.MovieService.Companion.BASE_URL
+import com.adolfo.android.moviesapp.data.local.cart.MovieCartDatabase
 import com.adolfo.android.moviesapp.data.repository.MovieRepositoryImpl
 import com.adolfo.android.moviesapp.domain.repository.MovieRepository
 import com.squareup.moshi.Moshi
@@ -58,12 +61,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesMovieRepository(movieService: MovieService): MovieRepository {
-        return MovieRepositoryImpl(movieService = movieService)
+    fun providesDatabase(application: Application): MovieCartDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            name = "movie_db",
+            klass = MovieCartDatabase::class.java
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providesMovieRepository(
+        movieService: MovieService,
+        movieDatabase: MovieCartDatabase
+    ): MovieRepository {
+        return MovieRepositoryImpl(
+            movieService = movieService,
+            movieDatabase = movieDatabase.movieCartDao()
+        )
     }
 
 }
-
-/**
- * Request{method=GET, url=https://api.themoviedb.org/3/movie/now_playing, headers=[api_key:e9ba2bff1c00cd46a61c1896636fa978, language:es-M], tags={class retrofit2.Invocation=com.adolfo.android.moviesapp.data.api.MovieService.getHomeMovies() []}}
- */
